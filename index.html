@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能动漫生成系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 智能动漫生成系统</h1>
+            <p class="subtitle">将小说文本转换为图文配音动漫作品</p>
+        </header>
+
+        <main>
+            <section class="input-section">
+                <h2>📝 文本输入</h2>
+                <textarea id="novelText" placeholder="在此粘贴或输入小说文本内容...&#10;&#10;支持多段落输入，系统将自动为每个段落生成对应场景。"></textarea>
+                <div class="input-controls">
+                    <button id="clearBtn" class="secondary-btn">清空</button>
+                    <button id="loadSampleBtn" class="secondary-btn">加载示例</button>
+                </div>
+            </section>
+
+            <section class="settings-section">
+                <h2>⚙️ 生成设置</h2>
+                
+                <div class="settings-grid">
+                    <div class="setting-group">
+                        <label for="styleSelect">画面风格</label>
+                        <select id="styleSelect">
+                            <option value="anime">日式动漫</option>
+                            <option value="manga">漫画风格</option>
+                            <option value="realistic">写实风格</option>
+                            <option value="chibi">Q版可爱</option>
+                            <option value="watercolor">水彩画风</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="voiceSelect">配音类型</label>
+                        <select id="voiceSelect">
+                            <option value="male1">男声1 - 沉稳</option>
+                            <option value="male2">男声2 - 年轻</option>
+                            <option value="female1">女声1 - 温柔</option>
+                            <option value="female2">女声2 - 活泼</option>
+                            <option value="narrator">旁白 - 专业</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="bgmSelect">背景音乐</label>
+                        <select id="bgmSelect">
+                            <option value="none">无背景音乐</option>
+                            <option value="peaceful">平和舒缓</option>
+                            <option value="exciting">激昂热血</option>
+                            <option value="mysterious">神秘悬疑</option>
+                            <option value="romantic">浪漫温馨</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-group">
+                        <label for="bgmVolume">音乐音量</label>
+                        <input type="range" id="bgmVolume" min="0" max="100" value="50">
+                        <span id="volumeValue">50%</span>
+                    </div>
+                </div>
+
+                <div class="character-library">
+                    <h3>👥 角色库管理</h3>
+                    <div id="characterList" class="character-list">
+                        <div class="empty-state">暂无角色，系统将自动识别文本中的角色</div>
+                    </div>
+                    <button id="addCharacterBtn" class="secondary-btn">+ 添加角色</button>
+                </div>
+
+                <button id="generateBtn" class="primary-btn">🎨 开始生成动漫</button>
+            </section>
+
+            <section class="preview-section" id="previewSection" style="display: none;">
+                <div class="section-header">
+                    <h2>🎞️ 预览效果</h2>
+                    <div class="preview-controls">
+                        <button id="playBtn" class="control-btn">▶️ 播放</button>
+                        <button id="pauseBtn" class="control-btn">⏸️ 暂停</button>
+                        <button id="exportBtn" class="control-btn">💾 导出</button>
+                    </div>
+                </div>
+
+                <div id="animeContent" class="anime-content"></div>
+
+                <div class="progress-info">
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <p id="progressText">准备中...</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 提示：确保同一角色在整个动漫中保持视觉一致性</p>
+        </footer>
+    </div>
+
+    <div id="characterModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>添加角色</h2>
+            <form id="characterForm">
+                <div class="form-group">
+                    <label for="charName">角色名称</label>
+                    <input type="text" id="charName" required>
+                </div>
+                <div class="form-group">
+                    <label for="charDesc">外貌描述</label>
+                    <textarea id="charDesc" rows="3" placeholder="例如：长发、蓝眼睛、白色连衣裙..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="charPersonality">性格特征</label>
+                    <input type="text" id="charPersonality" placeholder="例如：温柔、勇敢...">
+                </div>
+                <button type="submit" class="primary-btn">保存角色</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
